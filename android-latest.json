@@ -1,0 +1,8 @@
+{
+  "version": "1.1.1",
+  "versionCode": 4,
+  "url": "https://github.com/pnoch/promptflow-releases/releases/download/android-v1.1.1/promptflow-companion-1.1.1.apk",
+  "sha256": "3af723bcd1e1950c80a1e7b2b31fde384543ff1084d5c95890aa95ff57c84889",
+  "notes": "Adds in-app sideload updates.",
+  "releaseUrl": "https://github.com/pnoch/promptflow-releases/releases/tag/android-v1.1.1"
+}
