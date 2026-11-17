@@ -11,6 +11,21 @@
 <meta property="og:url" content="https://promptflow.siamcreations.app/">
 <meta name="twitter:card" content="summary">
 <link rel="canonical" href="https://promptflow.siamcreations.app/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "PromptFlow",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Linux",
+  "description": "Turns a product catalogue into scheduled TikTok posts: AI video generation through Google Flow, product sets, and a posting queue that respects each account's limits.",
+  "url": "https://promptflow.siamcreations.app/",
+  "offers": [
+    { "@type": "Offer", "name": "Lifetime", "price": "2899", "priceCurrency": "THB", "category": "one-time" },
+    { "@type": "Offer", "name": "Lifetime Pro", "price": "4499", "priceCurrency": "THB", "category": "one-time" }
+  ]
+}
+</script>
 <style>
   :root { color-scheme: dark; }
   * { box-sizing: border-box; }
@@ -75,17 +90,39 @@
   .cta-row { margin-top: 22px; }
   .cta-sub { display: block; margin-top: 8px; color: #94a3b8; font-size: .82rem; }
   .faq { margin-bottom: 26px; }
+  a:focus-visible, summary:focus-visible { outline: 2px solid #7dd3fc; outline-offset: 3px; }
+  .mark { display: block; margin: 0 auto 14px; width: 46px; height: 46px; }
+  .badge-row { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 14px; }
+  .badge {
+    border: 1px solid #24324a; border-radius: 999px; padding: 3px 10px;
+    color: #94a3b8; font-size: .78rem; background: #0e1729;
+  }
+  .requirements {
+    display: flex; flex-wrap: wrap; gap: 6px 18px; justify-content: center;
+    margin: 0 0 26px; color: #94a3b8; font-size: .84rem;
+  }
+  .requirements span::before { content: "·"; margin-right: 6px; color: #334155; }
+  .requirements span:first-child::before { content: ""; margin: 0; }
   #pf-checkout[hidden], #pf-landing[hidden] { display: none; }
 </style>
 </head>
 <body>
 <section id="pf-landing">
   <div class="hero">
+    <svg class="mark" viewBox="0 0 48 48" role="img" aria-label="PromptFlow">
+      <rect x="1.5" y="1.5" width="45" height="45" rx="11" fill="#0e1729" stroke="#2563eb" stroke-width="2"/>
+      <path d="M19 16.5v15l13-7.5z" fill="#7dd3fc"/>
+    </svg>
     <h1>PromptFlow</h1>
     <p>Generate videos with Google Flow, keep your product catalogue in one place, and publish to TikTok on a schedule — from your own desktop.</p>
     <div class="cta-row">
       <a class="cta" href="https://github.com/pnoch/promptflow-releases/releases/latest">Download for Linux</a>
       <span class="cta-sub">Free to download · licence from ฿2,899, bought inside the app</span>
+    </div>
+    <div class="badge-row">
+      <span class="badge">One-time payment</span>
+      <span class="badge">No subscription</span>
+      <span class="badge">Runs locally</span>
     </div>
   </div>
 
@@ -151,6 +188,11 @@
     </div>
   </div>
 
+  <div class="cta-row" style="text-align:center; margin-bottom: 30px;">
+    <a class="cta" href="https://github.com/pnoch/promptflow-releases/releases/latest">Download for Linux</a>
+    <span class="cta-sub">Pick the licence once the app is open.</span>
+  </div>
+
   <h2>Questions</h2>
   <div class="faq">
     <details>
@@ -177,6 +219,13 @@
       <summary>Refunds and receipts?</summary>
       <p>Paddle is the merchant of record, so the receipt comes from Paddle and their refund policy applies. Contact support if something goes wrong with a purchase.</p>
     </details>
+  </div>
+
+  <div class="requirements">
+    <span>Linux x86_64</span>
+    <span>~140 MB download</span>
+    <span>Browser engine bundled</span>
+    <span>Your own Google Flow and TikTok accounts</span>
   </div>
 
   <div class="page-footer">
