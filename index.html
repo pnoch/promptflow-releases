@@ -3,8 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex">
-<title>PromptFlow — secure checkout</title>
+<title>PromptFlow — automate TikTok and Google Flow publishing</title>
+<meta name="description" content="PromptFlow turns a product catalogue into scheduled TikTok posts: AI video generation through Google Flow, product sets, and one queue that respects each account's limits. Licence from ฿2,899, one-time.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="PromptFlow — automate TikTok and Google Flow publishing">
+<meta property="og:description" content="AI video generation, product sets and scheduled posting, from your own desktop. One-time licence from ฿2,899.">
+<meta property="og:url" content="https://promptflow.siamcreations.app/">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://promptflow.siamcreations.app/">
 <style>
   :root { color-scheme: dark; }
   * { box-sizing: border-box; }
@@ -57,6 +63,18 @@
   .plan li { margin-bottom: 4px; }
   .page-footer { text-align: center; color: #94a3b8; font-size: .82rem; border-top: 1px solid #1e2a42; padding-top: 16px; }
   .page-footer a { color: #7dd3fc; }
+  .steps { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); margin-bottom: 30px; }
+  .step { border-left: 2px solid #2563eb; padding: 2px 0 2px 14px; }
+  .step h3 { margin: 0 0 4px; font-size: .95rem; color: #fff; }
+  .step p { margin: 0; color: #94a3b8; font-size: .88rem; }
+  details { border: 1px solid #24324a; border-radius: 10px; background: #0e1729; padding: 12px 16px; margin-bottom: 10px; }
+  details[open] { border-color: #2f4463; }
+  summary { cursor: pointer; color: #fff; font-weight: 600; font-size: .93rem; }
+  details p { margin: 10px 0 0; color: #cbd5e1; font-size: .9rem; }
+  .section { margin-bottom: 30px; }
+  .cta-row { margin-top: 22px; }
+  .cta-sub { display: block; margin-top: 8px; color: #94a3b8; font-size: .82rem; }
+  .faq { margin-bottom: 26px; }
   #pf-checkout[hidden], #pf-landing[hidden] { display: none; }
 </style>
 </head>
@@ -65,8 +83,28 @@
   <div class="hero">
     <h1>PromptFlow</h1>
     <p>Generate videos with Google Flow, keep your product catalogue in one place, and publish to TikTok on a schedule — from your own desktop.</p>
-    <a class="cta" href="https://github.com/pnoch/promptflow-releases/releases/latest">Get PromptFlow</a>
-    <span class="cta-note">Purchases are completed inside the app.</span>
+    <div class="cta-row">
+      <a class="cta" href="https://github.com/pnoch/promptflow-releases/releases/latest">Download for Linux</a>
+      <span class="cta-sub">Free to download · licence from ฿2,899, bought inside the app</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>How it works</h2>
+    <div class="steps">
+      <div class="step">
+        <h3>1 · Install</h3>
+        <p>Download the bundle, unpack it, and run it. Your data stays on your machine.</p>
+      </div>
+      <div class="step">
+        <h3>2 · Activate</h3>
+        <p>Buy a lifetime licence in the app, or sign in with your email code on a second machine.</p>
+      </div>
+      <div class="step">
+        <h3>3 · Queue work</h3>
+        <p>Add a product set, generate the videos, and let the schedule do the posting.</p>
+      </div>
+    </div>
   </div>
 
   <h2>What it does</h2>
@@ -113,9 +151,38 @@
     </div>
   </div>
 
+  <h2>Questions</h2>
+  <div class="faq">
+    <details>
+      <summary>Is this a subscription?</summary>
+      <p>No. Both licences are one-time payments and include future updates. There is nothing to renew and nothing to cancel.</p>
+    </details>
+    <details>
+      <summary>What is the difference between the two licences?</summary>
+      <p>Lifetime runs two automations at a time. Lifetime Pro removes that cap. Everything else is identical.</p>
+    </details>
+    <details>
+      <summary>Can I use it on more than one computer?</summary>
+      <p>A licence is bound to one device. You can deactivate the current device from Settings → Licence, which frees the licence to be activated on another machine.</p>
+    </details>
+    <details>
+      <summary>What do I need to run it?</summary>
+      <p>Linux on x86_64 today. A Google Flow account for generation and a TikTok account for posting — both are yours, and PromptFlow drives them through your own browser session.</p>
+    </details>
+    <details>
+      <summary>What happens if I am offline?</summary>
+      <p>The app opens and your local data is there, but starting a new automation needs a licence check with our server. Purchases and activations also need a connection.</p>
+    </details>
+    <details>
+      <summary>Refunds and receipts?</summary>
+      <p>Paddle is the merchant of record, so the receipt comes from Paddle and their refund policy applies. Contact support if something goes wrong with a purchase.</p>
+    </details>
+  </div>
+
   <div class="page-footer">
     <p>Prices in Thai baht. One device per licence — deactivate it from Settings → Licence to move the licence to another machine.<br>
-    Payments are processed by Paddle, our merchant of record.</p>
+    Payments are processed by Paddle, our merchant of record.<br>
+    <a href="./privacy-policy.html">Privacy policy</a> · <a href="https://github.com/pnoch/promptflow-releases/releases">Release notes</a></p>
   </div>
 </section>
 
