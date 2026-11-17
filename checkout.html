@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PromptFlow — automate TikTok and Google Flow publishing</title>
+<meta name="description" content="PromptFlow turns a product catalogue into scheduled TikTok posts: AI video generation through Google Flow, product sets, and one queue that respects each account's limits. Licence from ฿2,899, one-time.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="PromptFlow — automate TikTok and Google Flow publishing">
+<meta property="og:description" content="AI video generation, product sets and scheduled posting, from your own desktop. One-time licence from ฿2,899.">
+<meta property="og:url" content="https://promptflow.siamcreations.app/">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://promptflow.siamcreations.app/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='11' fill='%230e1729'/%3E%3Cpath d='M19 16.5v15l13-7.5z' fill='%237dd3fc'/%3E%3C/svg%3E">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "PromptFlow",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Linux",
+  "description": "Turns a product catalogue into scheduled TikTok posts: AI video generation through Google Flow, product sets, and a posting queue that respects each account's limits.",
+  "url": "https://promptflow.siamcreations.app/",
+  "offers": [
+    { "@type": "Offer", "name": "Lifetime", "price": "2899", "priceCurrency": "THB", "category": "one-time" },
+    { "@type": "Offer", "name": "Lifetime Pro", "price": "4499", "priceCurrency": "THB", "category": "one-time" }
+  ]
+}
+</script>
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 24px;
+    background: radial-gradient(1100px 520px at 50% -12%, #17233d 0%, #0b1120 55%, #070b14 100%);
+    color: #e2e8f0;
+    font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  main {
+    width: 100%; max-width: 460px; padding: 32px 28px; text-align: center;
+    background: rgba(17, 28, 51, .92); border: 1px solid #24324a; border-radius: 16px;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, .45);
+  }
+  h1 { margin: 0 0 10px; font-size: 1.35rem; letter-spacing: .01em; color: #fff; }
+  #status { margin: 0; color: #cbd5e1; }
+  #pf-landing { margin: 14px 0 0; }
+  #pf-landing p { margin: 0 0 14px; color: #cbd5e1; }
+  .tiers { display: grid; gap: 10px; margin: 0 0 14px; }
+  .tier { border: 1px solid #24324a; border-radius: 12px; padding: 10px 12px; background: #0e1729; }
+  .tier-name { color: #fff; font-weight: 600; }
+  .tier-price { color: #7dd3fc; font-variant-numeric: tabular-nums; }
+  .tier-note { color: #94a3b8; font-size: .82rem; }
+  .muted { color: #94a3b8; font-size: .85rem; }
+  footer { margin-top: 26px; padding-top: 16px; border-top: 1px solid #1e2a42; }
+  footer p { margin: 0; }
+  noscript p { margin: 14px 0 0; color: #fbbf24; }
+  #pf-landing { width: 100%; max-width: 760px; text-align: left; }
+  .hero { text-align: center; margin-bottom: 34px; }
+  .hero h1 { font-size: 2rem; margin: 0 0 10px; }
+  .hero p { margin: 0 auto; max-width: 540px; color: #cbd5e1; font-size: 1.05rem; }
+  .cta {
+    display: inline-block; margin-top: 20px; padding: 11px 20px; border-radius: 10px;
+    background: #2563eb; color: #fff; text-decoration: none; font-weight: 600;
+  }
+  .cta:hover { background: #1d4ed8; }
+  .cta-note { display: block; margin-top: 8px; color: #94a3b8; font-size: .82rem; }
+  h2 { font-size: 1.05rem; color: #fff; margin: 0 0 12px; }
+  .features { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); margin-bottom: 30px; }
+  .feature { border: 1px solid #24324a; border-radius: 12px; padding: 14px 16px; background: #0e1729; }
+  .feature h3 { margin: 0 0 6px; font-size: .95rem; color: #fff; }
+  .feature p { margin: 0; color: #94a3b8; font-size: .88rem; }
+  .pricing { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); margin-bottom: 22px; }
+  .plan { border: 1px solid #24324a; border-radius: 14px; padding: 18px; background: #111c33; }
+  .plan.featured { border-color: #2563eb; box-shadow: 0 0 0 1px #2563eb inset; }
+  .plan h3 { margin: 0 0 4px; font-size: 1rem; color: #fff; }
+  .plan .price { font-size: 1.6rem; color: #7dd3fc; font-variant-numeric: tabular-nums; }
+  .plan .price span { font-size: .9rem; color: #94a3b8; }
+  .plan ul { margin: 12px 0 0; padding-left: 18px; color: #cbd5e1; font-size: .88rem; }
+  .plan li { margin-bottom: 4px; }
+  .page-footer { text-align: center; color: #94a3b8; font-size: .82rem; border-top: 1px solid #1e2a42; padding-top: 16px; }
+  .page-footer a { color: #7dd3fc; }
+  .steps { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); margin-bottom: 30px; }
+  .step { border-left: 2px solid #2563eb; padding: 2px 0 2px 14px; }
+  .step h3 { margin: 0 0 4px; font-size: .95rem; color: #fff; }
+  .step p { margin: 0; color: #94a3b8; font-size: .88rem; }
+  details { border: 1px solid #24324a; border-radius: 10px; background: #0e1729; padding: 12px 16px; margin-bottom: 10px; }
+  details[open] { border-color: #2f4463; }
+  summary { cursor: pointer; color: #fff; font-weight: 600; font-size: .93rem; }
+  details p { margin: 10px 0 0; color: #cbd5e1; font-size: .9rem; }
+  .section { margin-bottom: 30px; }
+  .cta-row { margin-top: 22px; }
+  .cta-sub { display: block; margin-top: 8px; color: #94a3b8; font-size: .82rem; }
+  .faq { margin-bottom: 26px; }
+  a:focus-visible, summary:focus-visible { outline: 2px solid #7dd3fc; outline-offset: 3px; }
+  .mark { display: block; margin: 0 auto 14px; width: 46px; height: 46px; }
+  .badge-row { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 14px; }
+  .badge {
+    border: 1px solid #24324a; border-radius: 999px; padding: 3px 10px;
+    color: #94a3b8; font-size: .78rem; background: #0e1729;
+  }
+  .requirements {
+    display: flex; flex-wrap: wrap; gap: 6px 18px; justify-content: center;
+    margin: 0 0 26px; color: #94a3b8; font-size: .84rem;
+  }
+  .requirements span::before { content: "·"; margin-right: 6px; color: #334155; }
+  .requirements span:first-child::before { content: ""; margin: 0; }
+  #pf-checkout[hidden], #pf-landing[hidden] { display: none; }
+</style>
+</head>
+<body>
+<section id="pf-landing">
+  <div class="hero">
+    <svg class="mark" viewBox="0 0 48 48" role="img" aria-label="PromptFlow">
+      <rect x="1.5" y="1.5" width="45" height="45" rx="11" fill="#0e1729" stroke="#2563eb" stroke-width="2"/>
+      <path d="M19 16.5v15l13-7.5z" fill="#7dd3fc"/>
+    </svg>
+    <h1>PromptFlow</h1>
+    <p>Generate videos with Google Flow, keep your product catalogue in one place, and publish to TikTok on a schedule — from your own desktop.</p>
+    <div class="cta-row">
+      <a class="cta" href="https://github.com/pnoch/promptflow-releases/releases/latest">Download for Linux</a>
+      <span class="cta-sub">Free to download · licence from ฿2,899, bought inside the app</span>
+    </div>
+    <div class="badge-row">
+      <span class="badge">One-time payment</span>
+      <span class="badge">No subscription</span>
+      <span class="badge">Runs locally</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>How it works</h2>
+    <div class="steps">
+      <div class="step">
+        <h3>1 · Install</h3>
+        <p>Download the bundle, unpack it, and run it. Your data stays on your machine.</p>
+      </div>
+      <div class="step">
+        <h3>2 · Activate</h3>
+        <p>Buy a lifetime licence in the app, or sign in with your email code on a second machine.</p>
+      </div>
+      <div class="step">
+        <h3>3 · Queue work</h3>
+        <p>Add a product set, generate the videos, and let the schedule do the posting.</p>
+      </div>
+    </div>
+  </div>
+
+  <h2>What it does</h2>
+  <div class="features">
+    <div class="feature">
+      <h3>AI video generation</h3>
+      <p>Drive Google Flow and local engines to turn a product set into ready-to-post videos.</p>
+    </div>
+    <div class="feature">
+      <h3>Product sets</h3>
+      <p>Import a catalogue, generate per-product assets, and keep everything tied together.</p>
+    </div>
+    <div class="feature">
+      <h3>Scheduled publishing</h3>
+      <p>Queue posts across accounts, with rate limits and daily caps that respect each one.</p>
+    </div>
+    <div class="feature">
+      <h3>One place to review</h3>
+      <p>Export, edit and check what went out, without juggling browser tabs.</p>
+    </div>
+  </div>
+
+  <h2>Licences</h2>
+  <div class="pricing">
+    <div class="plan">
+      <h3>Lifetime</h3>
+      <div class="price">฿2,899 <span>once</span></div>
+      <ul>
+        <li>Pay once, use forever</li>
+        <li>2 parallel automations</li>
+        <li>1 device</li>
+        <li>All future updates</li>
+      </ul>
+    </div>
+    <div class="plan featured">
+      <h3>Lifetime Pro</h3>
+      <div class="price">฿4,499 <span>once</span></div>
+      <ul>
+        <li>Everything in Lifetime</li>
+        <li>Unlimited parallel automations</li>
+        <li>1 device</li>
+        <li>All future updates</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="cta-row" style="text-align:center; margin-bottom: 30px;">
+    <a class="cta" href="https://github.com/pnoch/promptflow-releases/releases/latest">Download for Linux</a>
+    <span class="cta-sub">Pick the licence once the app is open.</span>
+  </div>
+
+  <h2>Questions</h2>
+  <div class="faq">
+    <details>
+      <summary>Is this a subscription?</summary>
+      <p>No. Both licences are one-time payments and include future updates. There is nothing to renew and nothing to cancel.</p>
+    </details>
+    <details>
+      <summary>What is the difference between the two licences?</summary>
+      <p>Lifetime runs two automations at a time. Lifetime Pro removes that cap. Everything else is identical.</p>
+    </details>
+    <details>
+      <summary>Can I use it on more than one computer?</summary>
+      <p>A licence is bound to one device. You can deactivate the current device from Settings → Licence, which frees the licence to be activated on another machine.</p>
+    </details>
+    <details>
+      <summary>What do I need to run it?</summary>
+      <p>Linux on x86_64 today. A Google Flow account for generation and a TikTok account for posting — both are yours, and PromptFlow drives them through your own browser session.</p>
+    </details>
+    <details>
+      <summary>What happens if I am offline?</summary>
+      <p>The app opens and your local data is there, but starting a new automation needs a licence check with our server. Purchases and activations also need a connection.</p>
+    </details>
+    <details>
+      <summary>Refunds and receipts?</summary>
+      <p>Paddle is the merchant of record, so the receipt comes from Paddle and their refund policy applies. Contact support if something goes wrong with a purchase.</p>
+    </details>
+  </div>
+
+  <div class="requirements">
+    <span>Linux x86_64</span>
+    <span>~140 MB download</span>
+    <span>Browser engine bundled</span>
+    <span>Your own Google Flow and TikTok accounts</span>
+  </div>
+
+  <div class="page-footer">
+    <p>Prices in Thai baht. One device per licence — deactivate it from Settings → Licence to move the licence to another machine.<br>
+    Payments are processed by Paddle, our merchant of record.<br>
+    <a href="./privacy-policy.html">Privacy policy</a> · <a href="https://github.com/pnoch/promptflow-releases/releases">Release notes</a></p>
+  </div>
+</section>
+
+<main id="pf-checkout" hidden>
+  <h1>PromptFlow</h1>
+  <p id="status" role="status" aria-live="polite">Opening your secure checkout…</p>
+  <noscript>
+    <p>Checkout needs JavaScript. Please start the purchase from the PromptFlow app and open the link it gives you.</p>
+  </noscript>
+  <footer>
+    <p class="muted">Payments are processed by Paddle, our merchant of record.</p>
+  </footer>
+</main>
+
+<!--
+  Public configuration, injected at deploy time (see README.md).
+  PADDLE_CLIENT_TOKEN is the public client-side token — it is meant to be
+  visible in the browser. Never put the server API key or any other secret in
+  this file. Empty values fail closed: the page tells the buyer to start from
+  the app instead of calling Paddle with an undefined token.
+-->
+<script id="pf-paddle-config">
+  window.PADDLE_CLIENT_TOKEN = window.PADDLE_CLIENT_TOKEN || "live_b196e2ba710b930d6958e7e965c";
+  window.PADDLE_ENVIRONMENT = window.PADDLE_ENVIRONMENT || "production";
+</script>
+
+<script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
+
+<script id="pf-checkout-bootstrap">
+  (function () {
+    'use strict';
+
+    var INCOMPLETE = 'This link is incomplete — please start the purchase from the app.';
+    var NO_TRANSACTION = 'Checkout opens from inside the PromptFlow app.';
+    var NOT_CONFIGURED = 'Checkout is not configured right now. Please start the purchase from the app, or contact support if this keeps happening.';
+    var UNAVAILABLE = 'The payment provider could not be loaded. Please check your connection and reload, or start the purchase from the app.';
+    var FAILED = 'Paddle could not open this checkout. Please start the purchase from the app.';
+
+    var statusEl = document.getElementById('status');
+
+    function show(message) {
+      if (statusEl) statusEl.textContent = message;
+    }
+
+    // The backend appends `?_ptxn=<transaction_id>` to the checkout page URL,
+    // so a transaction id is `txn_` followed by a 26-character ULID.
+    function transactionId() {
+      var raw = new URLSearchParams(window.location.search).get('_ptxn') || '';
+      return /^txn_[0-9a-z]{26}$/.test(raw) ? raw : '';
+    }
+
+    function clientToken() {
+      var token = window.PADDLE_CLIENT_TOKEN;
+      return typeof token === 'string' ? token.trim() : '';
+    }
+
+    function environment() {
+      return window.PADDLE_ENVIRONMENT === 'sandbox' ? 'sandbox' : 'production';
+    }
+
+    // A bare visit is not an error: someone found the domain and wants to know
+    // what this is. A malformed link is different — that one is worth flagging.
+    var landing = document.getElementById('pf-landing');
+    var checkout = document.getElementById('pf-checkout');
+
+    function showCheckout() {
+      if (landing) landing.hidden = true;
+      if (checkout) checkout.hidden = false;
+    }
+
+    // A bare visit is not an error: someone found the domain and wants to know
+    // what this is. A malformed link is different — that one is worth flagging.
+    var txn = transactionId();
+    if (!txn) {
+      var hasParam = new URLSearchParams(window.location.search).has('_ptxn');
+      show(hasParam ? INCOMPLETE : NO_TRANSACTION);
+      if (hasParam) showCheckout();
+      return;
+    }
+
+    showCheckout();
+
+    var token = clientToken();
+    if (!token) {
+      show(NOT_CONFIGURED);
+      return;
+    }
+
+    var Paddle = window.Paddle;
+    if (!Paddle || !Paddle.Environment || !Paddle.Initialize || !Paddle.Checkout) {
+      show(UNAVAILABLE);
+      return;
+    }
+
+    try {
+      Paddle.Environment.set(environment());
+      var ready = Paddle.Initialize({ token: token });
+      if (ready && typeof ready.catch === 'function') {
+        ready.catch(function () { show(FAILED); });
+      }
+      Paddle.Checkout.open({ transactionId: txn });
+    } catch (error) {
+      show(FAILED);
+    }
+  })();
+</script>
+</body>
+</html>
