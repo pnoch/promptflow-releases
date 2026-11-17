@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>PromptFlow — secure checkout</title>
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 24px;
+    background: radial-gradient(1100px 520px at 50% -12%, #17233d 0%, #0b1120 55%, #070b14 100%);
+    color: #e2e8f0;
+    font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  main {
+    width: 100%; max-width: 460px; padding: 32px 28px; text-align: center;
+    background: rgba(17, 28, 51, .92); border: 1px solid #24324a; border-radius: 16px;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, .45);
+  }
+  h1 { margin: 0 0 10px; font-size: 1.35rem; letter-spacing: .01em; color: #fff; }
+  #status { margin: 0; color: #cbd5e1; }
+  .muted { color: #94a3b8; font-size: .85rem; }
+  footer { margin-top: 26px; padding-top: 16px; border-top: 1px solid #1e2a42; }
+  footer p { margin: 0; }
+  noscript p { margin: 14px 0 0; color: #fbbf24; }
+</style>
+</head>
+<body>
+<main>
+  <h1>PromptFlow</h1>
+  <p id="status" role="status" aria-live="polite">Opening your secure checkout…</p>
+  <noscript>
+    <p>Checkout needs JavaScript. Please start the purchase from the PromptFlow app and open the link it gives you.</p>
+  </noscript>
+  <footer>
+    <p class="muted">Payments are processed by Paddle, our merchant of record.</p>
+  </footer>
+</main>
+
+<!--
+  Public configuration, injected at deploy time (see README.md).
+  PADDLE_CLIENT_TOKEN is the public client-side token — it is meant to be
+  visible in the browser. Never put the server API key or any other secret in
+  this file. Empty values fail closed: the page tells the buyer to start from
+  the app instead of calling Paddle with an undefined token.
+-->
+<script id="pf-paddle-config">
+  // Public client token for the Siam Creations Paddle seller account (the same
+  // one the OmniHub page publishes). Client tokens are safe to expose; the API
+  // key never is. Replace it if you mint a dedicated token.
+  window.PADDLE_CLIENT_TOKEN = window.PADDLE_CLIENT_TOKEN || "live_b196e2ba710b930d6958e7e965c";
+  window.PADDLE_ENVIRONMENT = window.PADDLE_ENVIRONMENT || "production";
+</script>
+
+<script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
+
+<script id="pf-checkout-bootstrap">
+  (function () {
+    'use strict';
+
+    var INCOMPLETE = 'This link is incomplete — please start the purchase from the app.';
+    var NOT_CONFIGURED = 'Checkout is not configured right now. Please start the purchase from the app, or contact support if this keeps happening.';
+    var UNAVAILABLE = 'The payment provider could not be loaded. Please check your connection and reload, or start the purchase from the app.';
+    var FAILED = 'Paddle could not open this checkout. Please start the purchase from the app.';
+
+    var statusEl = document.getElementById('status');
+
+    function show(message) {
+      if (statusEl) statusEl.textContent = message;
+    }
+
+    // The backend appends `?_ptxn=<transaction_id>` to the checkout page URL,
+    // so a transaction id is `txn_` followed by a 26-character ULID.
+    function transactionId() {
+      var raw = new URLSearchParams(window.location.search).get('_ptxn') || '';
+      return /^txn_[0-9a-z]{26}$/.test(raw) ? raw : '';
+    }
+
+    function clientToken() {
+      var token = window.PADDLE_CLIENT_TOKEN;
+      return typeof token === 'string' ? token.trim() : '';
+    }
+
+    function environment() {
+      return window.PADDLE_ENVIRONMENT === 'sandbox' ? 'sandbox' : 'production';
+    }
+
+    var txn = transactionId();
+    if (!txn) {
+      show(INCOMPLETE);
+      return;
+    }
+
+    var token = clientToken();
+    if (!token) {
+      show(NOT_CONFIGURED);
+      return;
+    }
+
+    var Paddle = window.Paddle;
+    if (!Paddle || !Paddle.Environment || !Paddle.Initialize || !Paddle.Checkout) {
+      show(UNAVAILABLE);
+      return;
+    }
+
+    try {
+      Paddle.Environment.set(environment());
+      var ready = Paddle.Initialize({ token: token });
+      if (ready && typeof ready.catch === 'function') {
+        ready.catch(function () { show(FAILED); });
+      }
+      Paddle.Checkout.open({ transactionId: txn });
+    } catch (error) {
+      show(FAILED);
+    }
+  })();
+</script>
+</body>
+</html>
