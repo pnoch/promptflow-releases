@@ -32,31 +32,93 @@
   footer { margin-top: 26px; padding-top: 16px; border-top: 1px solid #1e2a42; }
   footer p { margin: 0; }
   noscript p { margin: 14px 0 0; color: #fbbf24; }
+  #pf-landing { width: 100%; max-width: 760px; text-align: left; }
+  .hero { text-align: center; margin-bottom: 34px; }
+  .hero h1 { font-size: 2rem; margin: 0 0 10px; }
+  .hero p { margin: 0 auto; max-width: 540px; color: #cbd5e1; font-size: 1.05rem; }
+  .cta {
+    display: inline-block; margin-top: 20px; padding: 11px 20px; border-radius: 10px;
+    background: #2563eb; color: #fff; text-decoration: none; font-weight: 600;
+  }
+  .cta:hover { background: #1d4ed8; }
+  .cta-note { display: block; margin-top: 8px; color: #94a3b8; font-size: .82rem; }
+  h2 { font-size: 1.05rem; color: #fff; margin: 0 0 12px; }
+  .features { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); margin-bottom: 30px; }
+  .feature { border: 1px solid #24324a; border-radius: 12px; padding: 14px 16px; background: #0e1729; }
+  .feature h3 { margin: 0 0 6px; font-size: .95rem; color: #fff; }
+  .feature p { margin: 0; color: #94a3b8; font-size: .88rem; }
+  .pricing { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); margin-bottom: 22px; }
+  .plan { border: 1px solid #24324a; border-radius: 14px; padding: 18px; background: #111c33; }
+  .plan.featured { border-color: #2563eb; box-shadow: 0 0 0 1px #2563eb inset; }
+  .plan h3 { margin: 0 0 4px; font-size: 1rem; color: #fff; }
+  .plan .price { font-size: 1.6rem; color: #7dd3fc; font-variant-numeric: tabular-nums; }
+  .plan .price span { font-size: .9rem; color: #94a3b8; }
+  .plan ul { margin: 12px 0 0; padding-left: 18px; color: #cbd5e1; font-size: .88rem; }
+  .plan li { margin-bottom: 4px; }
+  .page-footer { text-align: center; color: #94a3b8; font-size: .82rem; border-top: 1px solid #1e2a42; padding-top: 16px; }
+  .page-footer a { color: #7dd3fc; }
+  #pf-checkout[hidden], #pf-landing[hidden] { display: none; }
 </style>
 </head>
 <body>
-<main>
-  <h1>PromptFlow</h1>
+<section id="pf-landing">
+  <div class="hero">
+    <h1>PromptFlow</h1>
+    <p>Generate videos with Google Flow, keep your product catalogue in one place, and publish to TikTok on a schedule — from your own desktop.</p>
+    <a class="cta" href="https://github.com/pnoch/promptflow-releases/releases/latest">Get PromptFlow</a>
+    <span class="cta-note">Purchases are completed inside the app.</span>
+  </div>
 
-  <!-- Shown when there is no transaction to pay. Hidden as soon as a valid
-       ?_ptxn= is present, so a buyer never sees a second call to action. The
-       app is the source of truth for what is on sale and what it costs. -->
-  <section id="pf-landing">
-    <p>Automate TikTok and Google Flow video publishing from your desktop.</p>
-    <div class="tiers">
-      <div class="tier">
-        <div class="tier-name">Lifetime</div>
-        <div class="tier-price">฿2,899</div>
-        <div class="tier-note">Pay once, use forever</div>
-      </div>
-      <div class="tier">
-        <div class="tier-name">Lifetime Pro</div>
-        <div class="tier-price">฿4,499</div>
-        <div class="tier-note">Unlimited automation instances</div>
-      </div>
+  <h2>What it does</h2>
+  <div class="features">
+    <div class="feature">
+      <h3>AI video generation</h3>
+      <p>Drive Google Flow and local engines to turn a product set into ready-to-post videos.</p>
     </div>
-  </section>
+    <div class="feature">
+      <h3>Product sets</h3>
+      <p>Import a catalogue, generate per-product assets, and keep everything tied together.</p>
+    </div>
+    <div class="feature">
+      <h3>Scheduled publishing</h3>
+      <p>Queue posts across accounts, with rate limits and daily caps that respect each one.</p>
+    </div>
+    <div class="feature">
+      <h3>One place to review</h3>
+      <p>Export, edit and check what went out, without juggling browser tabs.</p>
+    </div>
+  </div>
 
+  <h2>Licences</h2>
+  <div class="pricing">
+    <div class="plan">
+      <h3>Lifetime</h3>
+      <div class="price">฿2,899 <span>once</span></div>
+      <ul>
+        <li>Pay once, use forever</li>
+        <li>Standard automation capacity</li>
+        <li>All future updates</li>
+      </ul>
+    </div>
+    <div class="plan featured">
+      <h3>Lifetime Pro</h3>
+      <div class="price">฿4,499 <span>once</span></div>
+      <ul>
+        <li>Everything in Lifetime</li>
+        <li>Unlimited automation instances</li>
+        <li>All future updates</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <p>Prices in Thai baht. Purchases are completed inside the PromptFlow app.<br>
+    Payments are processed by Paddle, our merchant of record.</p>
+  </div>
+</section>
+
+<main id="pf-checkout" hidden>
+  <h1>PromptFlow</h1>
   <p id="status" role="status" aria-live="polite">Opening your secure checkout…</p>
   <noscript>
     <p>Checkout needs JavaScript. Please start the purchase from the PromptFlow app and open the link it gives you.</p>
@@ -114,15 +176,25 @@
 
     // A bare visit is not an error: someone found the domain and wants to know
     // what this is. A malformed link is different — that one is worth flagging.
+    var landing = document.getElementById('pf-landing');
+    var checkout = document.getElementById('pf-checkout');
+
+    function showCheckout() {
+      if (landing) landing.hidden = true;
+      if (checkout) checkout.hidden = false;
+    }
+
+    // A bare visit is not an error: someone found the domain and wants to know
+    // what this is. A malformed link is different — that one is worth flagging.
     var txn = transactionId();
     if (!txn) {
       var hasParam = new URLSearchParams(window.location.search).has('_ptxn');
       show(hasParam ? INCOMPLETE : NO_TRANSACTION);
+      if (hasParam) showCheckout();
       return;
     }
 
-    var landing = document.getElementById('pf-landing');
-    if (landing) landing.hidden = true;
+    showCheckout();
 
     var token = clientToken();
     if (!token) {
