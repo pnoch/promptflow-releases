@@ -55,7 +55,6 @@
         <div class="tier-note">Unlimited automation instances</div>
       </div>
     </div>
-    <p class="muted">Purchases start inside the PromptFlow app, which opens the secure checkout here.</p>
   </section>
 
   <p id="status" role="status" aria-live="polite">Opening your secure checkout…</p>
@@ -75,9 +74,6 @@
   the app instead of calling Paddle with an undefined token.
 -->
 <script id="pf-paddle-config">
-  // Public client token for the Siam Creations Paddle seller account (same one
-  // the OmniHub page publishes). Client tokens are safe to expose; the API key
-  // never is. Replace it if you mint a dedicated token.
   window.PADDLE_CLIENT_TOKEN = window.PADDLE_CLIENT_TOKEN || "live_b196e2ba710b930d6958e7e965c";
   window.PADDLE_ENVIRONMENT = window.PADDLE_ENVIRONMENT || "production";
 </script>
