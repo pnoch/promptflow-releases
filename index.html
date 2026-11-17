@@ -85,6 +85,7 @@
     'use strict';
 
     var INCOMPLETE = 'This link is incomplete — please start the purchase from the app.';
+    var NO_TRANSACTION = 'Checkout opens from inside the PromptFlow app.';
     var NOT_CONFIGURED = 'Checkout is not configured right now. Please start the purchase from the app, or contact support if this keeps happening.';
     var UNAVAILABLE = 'The payment provider could not be loaded. Please check your connection and reload, or start the purchase from the app.';
     var FAILED = 'Paddle could not open this checkout. Please start the purchase from the app.';
@@ -111,9 +112,12 @@
       return window.PADDLE_ENVIRONMENT === 'sandbox' ? 'sandbox' : 'production';
     }
 
+    // A bare visit is not an error: someone found the domain and wants to know
+    // what this is. A malformed link is different — that one is worth flagging.
     var txn = transactionId();
     if (!txn) {
-      show(INCOMPLETE);
+      var hasParam = new URLSearchParams(window.location.search).has('_ptxn');
+      show(hasParam ? INCOMPLETE : NO_TRANSACTION);
       return;
     }
 
