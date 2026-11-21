@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>PromptFlow Companion Privacy Policy</title>
+<title>PromptFlow Privacy Policy</title>
 <style>
   :root { color-scheme: dark; }
   body { margin: 0; background: #0f172a; color: #e2e8f0; font: 16px/1.65 system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }
@@ -18,11 +18,32 @@
 </head>
 <body>
 <main>
-<h1>PromptFlow Companion Privacy Policy</h1>
-<p class="muted">Effective: 2026-10-28</p>
-<p>PromptFlow Companion is a companion app for the PromptFlow desktop application. This policy explains what the app stores and transmits.</p>
+<h1>PromptFlow Privacy Policy</h1>
+<p class="muted">Effective: 2026-11-21</p>
 
-<h2>Data stored on your device</h2>
+<p>This policy covers the PromptFlow website, the PromptFlow desktop application, the licence server it talks to, and the PromptFlow Companion app for Android. It does not cover Google Flow, TikTok or any other service you connect, which have their own policies.</p>
+
+<h2>This website</h2>
+<p>The site is a set of static files. It sets no cookies, runs no analytics, and loads no third-party scripts. The static host that serves it may keep standard request logs (IP address, user agent, requested path) for security and operations.</p>
+
+<h2>Payments</h2>
+<p>Checkout is hosted by Stripe. Your card details are entered on Stripe's pages and never reach our servers. Stripe sends us the email address you supply, the amount and currency, the payment status, and identifiers for the payment and any refund or dispute. Stripe's own privacy policy governs the data it processes.</p>
+<p>If you ask for a tax invoice, we also receive the name, billing address and tax identification number you provide at checkout. We keep a record of each sale and licence so we can issue the licence, handle refunds, answer tax questions and meet accounting obligations.</p>
+
+<h2>The desktop application</h2>
+<p>The app runs locally: your media, product catalogues, schedules and generated videos stay on your machine. It contacts the licence server only for the following:</p>
+<ul>
+  <li>Your email address, to create the account that owns the licence.</li>
+  <li>A device identifier, a device name and a per-device secret, to bind the licence to one machine and to let you move it later.</li>
+  <li>Licence validation and automation-instance counts, so the tier you bought is enforced.</li>
+  <li>Requests you trigger for connected features, such as queue, scheduling and crash reports.</li>
+</ul>
+<p>We do not receive your Google Flow or TikTok credentials, your generated media, or your local databases.</p>
+
+<h2>The Android companion app</h2>
+<p>PromptFlow Companion is a companion app for the desktop application. This section explains what it stores and transmits.</p>
+
+<h3>Data stored on your device</h3>
 <ul>
   <li>A scoped companion token and backend URL.</li>
   <li>NAS WebDAV URL, username, and password in Android Keystore-backed encrypted storage.</li>
@@ -30,7 +51,7 @@
   <li>App settings and notification state.</li>
 </ul>
 
-<h2>Data sent to PromptFlow servers</h2>
+<h3>Data sent to PromptFlow servers</h3>
 <ul>
   <li>Email address when you choose email-code pairing.</li>
   <li>Device name/model and a companion device identifier.</li>
@@ -39,23 +60,27 @@
 </ul>
 <p>PromptFlow servers do not receive your media or NAS credentials.</p>
 
-<h2>Data sent to your desktop and NAS</h2>
+<h3>Data sent to your desktop and NAS</h3>
 <p>The app sends allowlisted requests to your desktop through the PromptFlow backend. The desktop uploads media to your NAS; the phone downloads it directly with the read-only NAS account you configure.</p>
 
 <h2>Sharing</h2>
-<p>We do not sell your data, show ads, or include third-party analytics SDKs.</p>
+<p>We do not sell your data, show ads, or include third-party analytics. Data is shared with service providers only to run the product: Stripe for payments, our email provider for licence delivery and sign-in codes, and our hosting provider.</p>
 
 <h2>Retention and deletion</h2>
-<p>Unpairing clears the local token, cache, and downloaded media. Revoking the device on the desktop invalidates the token immediately. Contact support for backend account or device deletion.</p>
+<p>Payment webhook payloads are deleted after 30 days. Licence records are kept while the licence exists and afterwards for as long as accounting law requires. Unpairing the companion app clears its local token, cache, and downloaded media; revoking the device on the desktop invalidates the token immediately. Contact support for backend account or device deletion.</p>
+<p>Deleting the account does not cancel a licence you have already bought, but it does remove the record we need to re-issue it.</p>
+
+<h2>Your choices</h2>
+<p>You can deactivate a device from Settings → Licence, which frees the licence for another machine. To ask for a copy or deletion of the account data we hold, contact support.</p>
 
 <h2>Security</h2>
-<p>Data is encrypted in transit with HTTPS/WSS. Tokens and NAS credentials are stored with Android Keystore-backed encryption. Downloaded APKs are verified by SHA-256 before installation in the sideload build.</p>
+<p>Everything between the app and the licence server uses HTTPS/WSS. Licence keys and per-device secrets are stored in the operating system's keyring, not in plain files. In the companion app, tokens and NAS credentials are stored with Android Keystore-backed encryption, and downloaded APKs are verified by SHA-256 before installation in the sideload build.</p>
 
 <h2>Children</h2>
-<p>The app is a business tool and is not directed to children under 13.</p>
+<p>PromptFlow is a business tool and is not directed to children under 13.</p>
 
 <h2>Contact</h2>
-<p><a href="https://getpromptx.com/support">https://getpromptx.com/support</a></p>
+<p><a href="https://getpromptx.com/support">getpromptx.com/support</a></p>
 </main>
 </body>
 </html>

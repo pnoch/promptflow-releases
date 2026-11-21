@@ -218,7 +218,7 @@
     </details>
     <details>
       <summary>Refunds and receipts?</summary>
-      <p>Paddle is the merchant of record, so the receipt comes from Paddle and their refund policy applies. Contact support if something goes wrong with a purchase.</p>
+      <p>Checkout is handled by Stripe, and the receipt comes from Stripe. If a purchase goes wrong, contact support and we will sort it out.</p>
     </details>
   </div>
 
@@ -231,111 +231,42 @@
 
   <div class="page-footer">
     <p>Prices in Thai baht. One device per licence — deactivate it from Settings → Licence to move the licence to another machine.<br>
-    Payments are processed by Paddle, our merchant of record.<br>
+    Payments are processed by Stripe.<br>
     <a href="./privacy-policy.html">Privacy policy</a> · <a href="https://github.com/pnoch/promptflow-releases/releases">Release notes</a></p>
   </div>
 </section>
 
 <main id="pf-checkout" hidden>
   <h1>PromptFlow</h1>
-  <p id="status" role="status" aria-live="polite">Opening your secure checkout…</p>
-  <noscript>
-    <p>Checkout needs JavaScript. Please start the purchase from the PromptFlow app and open the link it gives you.</p>
-  </noscript>
-  <footer>
-    <p class="muted">Payments are processed by Paddle, our merchant of record.</p>
-  </footer>
+  <p id="status" role="status" aria-live="polite"></p>
+  <p class="muted">You can close this window and return to the app.</p>
 </main>
 
 <!--
-  Public configuration, injected at deploy time (see README.md).
-  PADDLE_CLIENT_TOKEN is the public client-side token — it is meant to be
-  visible in the browser. Never put the server API key or any other secret in
-  this file. Empty values fail closed: the page tells the buyer to start from
-  the app instead of calling Paddle with an undefined token.
+  The purchase itself opens in the app: the backend creates a Stripe Checkout
+  session and the app opens that URL in its own window. Stripe then returns
+  here with `?checkout=success` or `?checkout=cancelled`, which is all this
+  script has to render. No provider script is loaded and no credential is
+  embedded, so there is nothing here to configure at deploy time.
 -->
-<script id="pf-paddle-config">
-  window.PADDLE_CLIENT_TOKEN = window.PADDLE_CLIENT_TOKEN || "live_b196e2ba710b930d6958e7e965c";
-  window.PADDLE_ENVIRONMENT = window.PADDLE_ENVIRONMENT || "production";
-</script>
-
-<script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
-
-<script id="pf-checkout-bootstrap">
+<script id="pf-return-state">
   (function () {
     'use strict';
 
-    var INCOMPLETE = 'This link is incomplete — please start the purchase from the app.';
-    var NO_TRANSACTION = 'Checkout opens from inside the PromptFlow app.';
-    var NOT_CONFIGURED = 'Checkout is not configured right now. Please start the purchase from the app, or contact support if this keeps happening.';
-    var UNAVAILABLE = 'The payment provider could not be loaded. Please check your connection and reload, or start the purchase from the app.';
-    var FAILED = 'Paddle could not open this checkout. Please start the purchase from the app.';
+    var state = new URLSearchParams(window.location.search).get('checkout');
+    if (state !== 'success' && state !== 'cancelled') return;
 
-    var statusEl = document.getElementById('status');
-
-    function show(message) {
-      if (statusEl) statusEl.textContent = message;
-    }
-
-    // The backend appends `?_ptxn=<transaction_id>` to the checkout page URL,
-    // so a transaction id is `txn_` followed by a 26-character ULID.
-    function transactionId() {
-      var raw = new URLSearchParams(window.location.search).get('_ptxn') || '';
-      return /^txn_[0-9a-z]{26}$/.test(raw) ? raw : '';
-    }
-
-    function clientToken() {
-      var token = window.PADDLE_CLIENT_TOKEN;
-      return typeof token === 'string' ? token.trim() : '';
-    }
-
-    function environment() {
-      return window.PADDLE_ENVIRONMENT === 'sandbox' ? 'sandbox' : 'production';
-    }
-
-    // A bare visit is not an error: someone found the domain and wants to know
-    // what this is. A malformed link is different — that one is worth flagging.
     var landing = document.getElementById('pf-landing');
-    var checkout = document.getElementById('pf-checkout');
-
-    function showCheckout() {
-      if (landing) landing.hidden = true;
-      if (checkout) checkout.hidden = false;
-    }
-
-    // A bare visit is not an error: someone found the domain and wants to know
-    // what this is. A malformed link is different — that one is worth flagging.
-    var txn = transactionId();
-    if (!txn) {
-      var hasParam = new URLSearchParams(window.location.search).has('_ptxn');
-      show(hasParam ? INCOMPLETE : NO_TRANSACTION);
-      if (hasParam) showCheckout();
-      return;
-    }
-
-    showCheckout();
-
-    var token = clientToken();
-    if (!token) {
-      show(NOT_CONFIGURED);
-      return;
-    }
-
-    var Paddle = window.Paddle;
-    if (!Paddle || !Paddle.Environment || !Paddle.Initialize || !Paddle.Checkout) {
-      show(UNAVAILABLE);
-      return;
-    }
-
-    try {
-      Paddle.Environment.set(environment());
-      var ready = Paddle.Initialize({ token: token });
-      if (ready && typeof ready.catch === 'function') {
-        ready.catch(function () { show(FAILED); });
-      }
-      Paddle.Checkout.open({ transactionId: txn });
-    } catch (error) {
-      show(FAILED);
+    var panel = document.getElementById('pf-checkout');
+    var status = document.getElementById('status');
+    if (landing) landing.hidden = true;
+    if (panel) panel.hidden = false;
+    if (status) {
+      // Stripe only redirects to `success` after the payment succeeded, including
+      // for delayed methods such as PromptPay.
+      status.textContent = state === 'success'
+        ? 'Payment complete. PromptFlow is activating your licence — this takes a few seconds.'
+        : 'Checkout was cancelled. Nothing was charged.';
     }
   })();
 </script>
